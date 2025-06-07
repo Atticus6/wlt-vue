@@ -52,7 +52,6 @@ export class ReactiveEffect {
       if (old) {
         this.clearDep(old);
       }
-
       this.deps[this._depsLength++] = dep;
     } else {
       this._depsLength++;

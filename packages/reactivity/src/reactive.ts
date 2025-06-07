@@ -27,3 +27,12 @@ const createReactiveObject = (v: any) => {
 
   return newProxy;
 };
+export const toReactive = <T>(v: T): T => {
+  return isObject(v) ? reactive(v as any) : v;
+};
+export const isReactive = (v: any) => {
+  if (!isObject(v)) {
+    return false;
+  }
+  return v[ReactiveFlags.IS_REACTIVE];
+};

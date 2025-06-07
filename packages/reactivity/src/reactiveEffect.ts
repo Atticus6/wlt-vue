@@ -41,7 +41,7 @@ export const trigger = (
   triggerEffects(dep);
 };
 
-const triggerEffects = (dep: Dep) => {
+export const triggerEffects = (dep: Dep) => {
   for (const effect of dep.keys()) {
     if (!effect._running) {
       effect.scheduler();
