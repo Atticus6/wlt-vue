@@ -2,11 +2,11 @@ import "./style.css";
 import typescriptLogo from "./typescript.svg";
 import viteLogo from "/vite.svg";
 import { setupCounter } from "./counter.ts";
-import { isObject } from "@wlt/shared";
-import { reactive } from "@wlt/reactivity";
+import { effect, reactive } from "@wlt/reactivity";
 
 const v = {
   name: "wlt",
+  age: 18,
   add: {
     city: "leping",
   },
@@ -14,7 +14,13 @@ const v = {
 
 const user = reactive(v);
 
-user.name = "111";
+effect(() => {
+  console.log("用户执行函数", user.name, user.age);
+});
+
+setTimeout(() => {
+  user.name = "atticus";
+}, 1000);
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
