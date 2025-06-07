@@ -1,14 +1,16 @@
 import "./style.css";
-import { effect, reactive, ref } from "@wlt/reactivity";
+import { computed, effect, reactive, ref } from "@wlt/reactivity";
 
 const app = document.getElementById("app")!;
 
-const name = ref("wlt");
-
+const count = ref(10);
+const total = computed(() => {
+  return count.value * 2;
+});
 effect(() => {
-  app.innerHTML = `name:${name.value}`;
+  app.innerHTML = `total:${total.value}`;
 });
 
 setTimeout(() => {
-  name.value = "atticus";
+  count.value = 30;
 }, 1000);

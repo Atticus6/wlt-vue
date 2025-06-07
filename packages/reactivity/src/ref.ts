@@ -30,7 +30,7 @@ class RefImpl<T> {
   }
 }
 
-const trackRefValue = (ref: { dep?: Dep }) => {
+export const trackRefValue = (ref: { dep?: Dep }) => {
   if (!activeEffect) {
     return;
   }
@@ -44,7 +44,7 @@ const trackRefValue = (ref: { dep?: Dep }) => {
   activeEffect.addDep(ref.dep);
 };
 
-const triggerRefValue = (ref: { dep?: Dep }) => {
+export const triggerRefValue = (ref: { dep?: Dep }) => {
   if (ref.dep) {
     triggerEffects(ref.dep);
   }

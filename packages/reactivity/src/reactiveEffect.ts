@@ -1,3 +1,4 @@
+import { DirtyLevel } from "./constants";
 import { createDep, type Dep } from "./dep";
 import { activeEffect } from "./effect";
 
@@ -43,6 +44,9 @@ export const trigger = (
 
 export const triggerEffects = (dep: Dep) => {
   for (const effect of dep.keys()) {
+    if (effect._dirtyLevel < DirtyLevel.Dirty) {
+      effect._dirtyLevel = DirtyLevel.Dirty;
+    }
     if (!effect._running) {
       effect.scheduler();
     }

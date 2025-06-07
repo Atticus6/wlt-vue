@@ -1,3 +1,4 @@
+import { DirtyLevel } from "./constants";
 import type { Dep } from "./dep";
 
 export let activeEffect: ReactiveEffect | undefined;
@@ -16,16 +17,25 @@ export class ReactiveEffect {
   private _depsLength = 0;
   private _trackId = 0;
   _running = 0;
+  _dirtyLevel = DirtyLevel.Dirty;
+
+  get dirty() {
+    return this._dirtyLevel === DirtyLevel.Dirty;
+  }
+  set dirty(v: boolean) {
+    this._dirtyLevel = v ? DirtyLevel.Dirty : DirtyLevel.NoDirty;
+  }
 
   constructor(public fn: () => any, public scheduler: () => any) {}
 
   run() {
+    this.dirty = false;
     console.log("开始收集依赖");
     const lastEffect = activeEffect;
     activeEffect = this;
     this.preRun();
     try {
-      this.fn();
+      return this.fn();
     } finally {
       console.log("收集依赖完成", activeEffect);
       this.postRun();
