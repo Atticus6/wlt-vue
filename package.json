@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@wlt/reactivity": "workspace:*",
-    "@wlt/shared": "workspace:*"
+    "@wlt/shared": "workspace:*",
+    "@wlt/runtime-core": "workspace:*",
+    "@wlt/runtime-dom": "workspace:*"
   },
   "workspaces": [
     "packages/*",
